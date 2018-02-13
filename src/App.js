@@ -6,34 +6,17 @@ import './App.css';
 import MemberHandler from './MemberHandler.js';
 
 
-
-function Button(props) {
-    // receive onClick and value from props
-    // onClick use the function and in button square place the value
-    return (
-      <div>
-        <h3>Please enter your 4 digit ID number</h3>
-        <input type="text" name="lastname" value={props.value}/>
-        <br /><br />
-        <button className="button" onClick={props.onClick}>
-          Enter
-        </button>
-        <br /><br />
-      </div>
-      // alert('you clicked on '+ this.props.value.toString())
-      //
-    );
-  // }
-}
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: '',
-      memberName : '',
+      memberId : '',
       index: 0,
       pageId: true,
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   selectDate() {
    return (
@@ -59,25 +42,47 @@ class App extends Component {
     );
   }
 
-  handleClick() {
+  handleChange(event) {
     this.setState({
-      index: 0,
-      pageId: !this.state.pageId,
+      memberId: event.target.value,
     });
+
+  }
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.memberId);
+    // this.setState({
+    //   pageId: !this.state.pageId,
+    // });
+    event.preventDefault();
   }
   whatToRender() {
     if (this.state.pageId) {
       return (
-        <div>
-          <Button value={this.state.memberName} onClick={() => this.handleClick()}/>
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={this.state.memberId} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Enter" />
+        </form>
       );
     }
-    return (
+    /*inside if : <Button value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit} /> */
+    /*
+    <form onSubmit={this.handleSubmit}>
+      <label>
+        Name:
+        <input type="text" value={this.state.value} onChange={this.handleChange} />
+      </label>
+      <input type="submit" value="Enter" />
+    </form>
+    */
+    /*return (
       <div>
-      {this.selectDate()}
+        <a>Hello {this.state.value}</a>
+        {this.selectDate()}
       </div>
-    );
+    );*/
   }
   render() {
     return (
