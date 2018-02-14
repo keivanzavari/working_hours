@@ -4,6 +4,7 @@ import 'react-day-picker/lib/style.css';
 import logo from './logo.svg';
 import './App.css';
 import MemberHandler from './MemberHandler.js';
+import DateHandler from './DateHandler.js';
 
 
 class App extends Component {
@@ -46,44 +47,40 @@ class App extends Component {
     this.setState({
       memberId: event.target.value,
     });
-
   }
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.memberId);
-    // this.setState({
-    //   pageId: !this.state.pageId,
-    // });
+    // alert('A name was submitted: ' + this.state.memberId);
+    this.setState({
+      pageId: !this.state.pageId,
+    });
     event.preventDefault();
   }
   whatToRender() {
     if (this.state.pageId) {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.memberId} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Enter" />
-        </form>
+        <div>
+          <h3>Please enter your 4 digit ID number</h3>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Name:
+              <input type="text" value={this.state.memberId} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Enter" />
+          </form>
+        </div>
+      );
+    } else {
+      /*inside if : <Button value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit} /> */
+
+      return (
+        <div>
+          <a>Hello {this.state.memberId}</a>
+          {this.selectDate()}
+        </div>
       );
     }
-    /*inside if : <Button value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit} /> */
-    /*
-    <form onSubmit={this.handleSubmit}>
-      <label>
-        Name:
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
-      </label>
-      <input type="submit" value="Enter" />
-    </form>
-    */
-    /*return (
-      <div>
-        <a>Hello {this.state.value}</a>
-        {this.selectDate()}
-      </div>
-    );*/
   }
+
   render() {
     return (
       <div className="App">
