@@ -7,29 +7,35 @@ function daysInMonth (month, year) {
   // Use 1 for January, 2 for February, etc.
   return new Date(year, month, 0).getDate();
 }
-function WorkDay() {
+export function WorkDay() {
   this.start = "00:00";
   this.finish = "00:00";
   this.breaks = "00";
   this.init = false;
 };
 
-function WorkMonth() {
+export function WorkMonth() {
   this.month = 1;
   this.name = monthNames[this.month-1];
   this.totDays = 31;
   this.days = [];
   this.empty = function() {return (this.days.length === 0)};
+  this.lastDayFilled = function () {
+    return this.days.length
+  };
 };
 
-function WorkYear() {
+export function WorkYear() {
   this.year = 2018;
   this.months = [];
   this.empty = function() {return (this.months.length === 0)};
+  this.lastMonthFilled = function () {
+    return this.months.length
+  };
 }
 
 
-class DateHandler {
+export class DateHandler {
   constructor() {
     this.activeY  = new WorkYear();
     this.activeM = new WorkMonth();
@@ -66,14 +72,17 @@ class DateHandler {
     this.activeD.start = start;
     this.activeD.finish = finish;
     this.activeD.breaks = breaks;
+    this.activeD.init = true;
+
+    this.activeM.days.push(this.activeD);
+    //
+    this.activeD = new WorkDay();
   }
 
   lastMonthFilled() {
     return this.activeY.months.length-1;
   }
 
-  lastDayFilled () {
-  }
 }
 
-export default DateHandler;
+// export default DateHandler;
