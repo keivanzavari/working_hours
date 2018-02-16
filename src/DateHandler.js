@@ -1,3 +1,4 @@
+import React from 'react';
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -11,7 +12,7 @@ export function WorkDay() {
   this.start = "00:00";
   this.finish = "00:00";
   this.breaks = "00";
-  this.init = false;
+  this.day = 0;
 };
 
 export function WorkMonth() {
@@ -59,7 +60,7 @@ export class DateHandler {
   }
 
   addMonth() {
-    if (this.activeM.totDays === this.activeM.days.length-1)
+    if (this.activeM.totDays === this.activeM.days.length)
     {
       this.activeY.months.push(this.activeM);
       return true;
@@ -68,15 +69,22 @@ export class DateHandler {
     }
   }
 
-  addWorkDay(start,finish,breaks) {
-    this.activeD.start = start;
-    this.activeD.finish = finish;
-    this.activeD.breaks = breaks;
-    this.activeD.init = true;
+  addWorkDay(workday) {
+    if (workday.day === 0)
+    {
+      return false;
+    }
+    this.activeD.start = workday.start;
+    this.activeD.finish = workday.finish;
+    this.activeD.breaks = workday.breaks;
+    this.activeD.day = workday.day;
 
     this.activeM.days.push(this.activeD);
-    //
+
+    // reset the active day object
     this.activeD = new WorkDay();
+    // console.log("[date handler] workday: ", workday);
+    return true;
   }
 
   lastMonthFilled() {
@@ -86,3 +94,12 @@ export class DateHandler {
 }
 
 // export default DateHandler;
+
+export function PrintDay(props) {
+  return (
+    <div>
+      <h3>day values: </h3>
+      <p>start: {props.workday.start}, finish: {props.workday.finish}, breaks: {props.workday.breaks}, day of month: {props.workday.day}</p>
+    </div>
+  );
+}
