@@ -6,6 +6,7 @@ import './App.css';
 import MemberHandler from './MemberHandler.js';
 import DateHandler from './DateHandler.js';
 
+var InteractEnum = {"ID":1, "CALENDAR":2, "WORKHOUR":3};
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class App extends Component {
       date: '',
       memberId : '',
       index: 0,
-      pageId: true,
+      pageId: InteractEnum.ID,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +31,9 @@ class App extends Component {
        onDayClick={(day, modifiers) =>  this.setState({date: day})}
      />
    );
-  }
+
+ } // selectDate
+
 
   renderMembers() {
     const index = 1
@@ -51,12 +54,13 @@ class App extends Component {
   handleSubmit(event) {
     // alert('A name was submitted: ' + this.state.memberId);
     this.setState({
-      pageId: !this.state.pageId,
+      pageId: InteractEnum.CALENDAR,
     });
     event.preventDefault();
   }
+
   whatToRender() {
-    if (this.state.pageId) {
+    if (this.state.pageId === InteractEnum.ID) {
       return (
         <div>
           <h3>Please enter your 4 digit ID number</h3>
@@ -69,7 +73,7 @@ class App extends Component {
           </form>
         </div>
       );
-    } else {
+    } else if (this.state.pageId === InteractEnum.CALENDAR) {
       /*inside if : <Button value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit} /> */
 
       return (
@@ -79,7 +83,8 @@ class App extends Component {
         </div>
       );
     }
-  }
+
+  } // whatToRender
 
   render() {
     return (
