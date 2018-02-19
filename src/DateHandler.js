@@ -24,6 +24,13 @@ export function WorkMonth() {
   this.lastDayFilled = function () {
     return this.days.length
   };
+  this.getLastDay = function() {
+    if (this.days.length === 0) {
+      return 0;
+    } else {
+      return this.days[this.days.length-1].day;
+    }
+  }
 };
 
 export function WorkYear() {
@@ -33,6 +40,13 @@ export function WorkYear() {
   this.lastMonthFilled = function () {
     return this.months.length
   };
+  this.getLastMonth = function() {
+    if (this.months.length === 0) {
+      return 0;
+    } else {
+      return this.months[this.months.length-1].month;
+    }
+  }
 }
 
 
@@ -60,17 +74,33 @@ export class DateHandler {
   }
 
   addMonth() {
+    // you can only add the active month to the active year if
+    // the given month if filled
+    // the year doesn't have this month yet, otherwise gets overwritten
     if (this.activeM.totDays === this.activeM.days.length)
     {
-      this.activeY.months.push(this.activeM);
+      // if month number is equal to the last month
+      if (this.activeM.month === this.activeY.getLastMonth())
+      {
+        let lastIdx = this.activeY.months.length;
+        let month = this.activeM;
+        this.activeY.months[lastIdx] = month;
+      } else {
+        this.activeY.months.push(this.activeM);
+      }
       return true;
     } else {
       return false;
     }
   }
 
+  /*
+  * add a work day to the active month and reset the active day
+  */
   addWorkDay(workday) {
-    if (workday.day === 0)
+    // cannot add a work day if the day number is not in range
+    // [ 1 - (total days of the month)]
+    if (workday.day <= 0 || workday.day > this.activeM.totDays)
     {
       return false;
     }
@@ -79,8 +109,13 @@ export class DateHandler {
     this.activeD.breaks = workday.breaks;
     this.activeD.day = workday.day;
 
-    this.activeM.days.push(this.activeD);
-
+    let lastDay = this.activeM.getLastDay();
+    if (workday.day === lastDay)
+    {
+      this.activeY.months[lastDay-1] = workday;
+    } else {
+      this.activeM.days.push(this.activeD);
+    }
     // reset the active day object
     this.activeD = new WorkDay();
     // console.log("[date handler] workday: ", workday);
