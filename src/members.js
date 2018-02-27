@@ -1,8 +1,7 @@
 var members = {
-  name: ["Keivan", "Karel"],
+  name: ["Alice", "Bob"],
   id: ["0001", "0002"],
 };
 
-// members["id"].indexOf("0001")
 
 export default members;
