@@ -14,11 +14,22 @@ class App extends Component {
     this.state = {
       date: '',
       memberId : '',
+      // memberId2 : '',
       index: 0,
       pageId: InteractEnum.ID,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDayClick = this.handleDayClick.bind(this);
+
+  }
+  handleDayClick(day) {
+    this.setState({ date: day });
+
+    day.getFullYear();
+    day.getMonth();
+    day.getDate();
+    console.log("you entered: ", day.toLocaleString());
   }
   selectDate() {
    return (
@@ -28,7 +39,7 @@ class App extends Component {
          foo: new Date(),
        }}
        todayButton="Go to Today"
-       onDayClick={(day, modifiers) =>  this.setState({date: day})}
+       onDayClick={this.handleDayClick}
      />
    );
 
@@ -41,15 +52,17 @@ class App extends Component {
     //   value: 'squares',
     //   index: index,
     // });
-    return (
-      <MemberHandler index={this.state.index}/>
-    );
+    // return (
+    //   <MemberHandler index={this.state.index}/>
+    // );
   }
 
   handleChange(event) {
     this.setState({
       memberId: event.target.value,
     });
+    // console.log("name: ", event.target.name);
+    // console.log("value: ", this.tate.memberId);
   }
   handleSubmit(event) {
     // alert('A name was submitted: ' + this.state.memberId);
@@ -57,6 +70,11 @@ class App extends Component {
       pageId: InteractEnum.CALENDAR,
     });
     event.preventDefault();
+
+    let tmp = new MemberHandler();
+    if (tmp.isMember(this.state.memberId)) {
+      console.log("found member: ", tmp.name);
+    }
   }
 
   whatToRender() {
@@ -89,10 +107,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo" />
+        {/*
+          <header className="App-header">
           <h1 className="App-title">Welcome to React</h1>
-        </header>
+          </header>
+          */}
         <div className="clearfix float-my-children">
           {/*<code>src/App.js</code>*/}
           {/*this.renderMembers()*/}
