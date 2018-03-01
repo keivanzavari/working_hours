@@ -4,7 +4,7 @@ import 'react-day-picker/lib/style.css';
 import logo from './logo.svg';
 import './App.css';
 import MemberHandler from './MemberHandler.js';
-import DateHandler from './DateHandler.js';
+// import DateHandler from './DateHandler.js';
 
 var InteractEnum = {"ID":1, "CALENDAR":2, "WORKHOUR":3};
 
@@ -21,6 +21,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
+    this.handleTime = this.handleTime.bind(this);
 
   }
   handleDayClick(day) {
@@ -30,6 +31,8 @@ class App extends Component {
     day.getMonth();
     day.getDate();
     console.log("you entered: ", day.toLocaleString());
+
+    this.setState({ pageId: InteractEnum.WORKHOUR });
   }
   selectDate() {
    return (
@@ -43,11 +46,22 @@ class App extends Component {
      />
    );
 
- } // selectDate
+  } // selectDate
 
+  selectTime() {
+    if (this.state.pageId === InteractEnum.WORKHOUR) {
+      return (
+        <div>
+          Start: <input type="time" id="myTime" defaultValue="09:00" onChange={this.handleTime}/><br/>
+          Break: <input type="text" id="myTime" defaultValue="30" onChange={this.handleTime}/><br/>
+          Finish: <input type="time" id="myTime" defaultValue="17:00" onChange={this.handleTime}/>
+        </div>
+      );
+    }
+  }
 
   renderMembers() {
-    const index = 1
+    // const index = 1
     // this.setState({
     //   value: 'squares',
     //   index: index,
@@ -77,6 +91,13 @@ class App extends Component {
     }
   }
 
+  handleTime(event) {
+    this.setState({
+      pageId: InteractEnum.WORKHOUR,
+    });
+    console.log("name: ", event.target.name);
+    console.log("value: ", event.target.value);
+  }
   whatToRender() {
     if (this.state.pageId === InteractEnum.ID) {
       return (
@@ -91,13 +112,19 @@ class App extends Component {
           </form>
         </div>
       );
-    } else if (this.state.pageId === InteractEnum.CALENDAR) {
+    } else {
+    //if (this.state.pageId === InteractEnum.CALENDAR) {
       /*inside if : <Button value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit} /> */
 
       return (
         <div>
-          <a>Hello {this.state.memberId}</a>
-          {this.selectDate()}
+          <h3>Hello {this.state.memberId}</h3>
+          <div className="float-left">
+            {this.selectDate()}
+          </div>
+          <div className="float-right">
+            {this.selectTime()}
+          </div>
         </div>
       );
     }
@@ -113,11 +140,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
           </header>
           */}
-        <div className="clearfix float-my-children">
           {/*<code>src/App.js</code>*/}
           {/*this.renderMembers()*/}
           {this.whatToRender()}
-        </div>
       </div>
     );
   }
