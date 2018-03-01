@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import members from './members.js';
 
 export default class MemberHandler {
