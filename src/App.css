@@ -28,25 +28,43 @@
   to { transform: rotate(360deg); }
 }
 
+.input-bar {
+  width: 200px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 5px 5px;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  color: #660000;
+  /*outline: none;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px #999;*/
+}
+
 .button {
-  padding: 10px 15px;
-  font-size: 24px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 5px 10px;
+  font-size: 20px;
   text-align: center;
   cursor: pointer;
   outline: none;
   color: #fff;
   background-color: #4CAF50;
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
+  border-radius: 10px;
+  box-shadow: 2px 0 2px #889;
 }
 
 .button:hover {background-color: #3e8e41}
 
 .button:active {
   background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+  box-shadow: 0 2px #666;
+  /*transform: translateY(4px);*/
 }
 
 .float-left {
