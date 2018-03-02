@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       date: '',
       memberId : '',
-      // memberId2 : '',
+      memberName : undefined,
       index: 0,
       pageId: InteractEnum.ID,
     };
@@ -52,24 +52,15 @@ class App extends Component {
     if (this.state.pageId === InteractEnum.WORKHOUR) {
       return (
         <div>
-          Start: <input type="time" id="myTime" defaultValue="09:00" onChange={this.handleTime}/><br/>
-          Break: <input type="text" id="myTime" defaultValue="30" onChange={this.handleTime}/><br/>
-          Finish: <input type="time" id="myTime" defaultValue="17:00" onChange={this.handleTime}/>
+          Start: <input className="input-bar" type="time" id="timeStart" defaultValue="09:00" onChange={this.handleTime}/><br/>
+          Break: <input className="input-bar" type="text" id="timeBreak" defaultValue="30" onChange={this.handleTime}/> minutes<br/>
+          Finish: <input className="input-bar" type="time" id="timeFinish" defaultValue="17:00" onChange={this.handleTime}/><br/><br/>
+          <button className="button">Save</button>
         </div>
       );
     }
   }
 
-  renderMembers() {
-    // const index = 1
-    // this.setState({
-    //   value: 'squares',
-    //   index: index,
-    // });
-    // return (
-    //   <MemberHandler index={this.state.index}/>
-    // );
-  }
 
   handleChange(event) {
     this.setState({
@@ -79,16 +70,23 @@ class App extends Component {
     // console.log("value: ", this.tate.memberId);
   }
   handleSubmit(event) {
-    // alert('A name was submitted: ' + this.state.memberId);
-    this.setState({
-      pageId: InteractEnum.CALENDAR,
-    });
-    event.preventDefault();
+    console.log("received id: ", this.state.memberId);
+    // event.preventDefault();
 
-    let tmp = new MemberHandler();
-    if (tmp.isMember(this.state.memberId)) {
-      console.log("found member: ", tmp.name);
+    let member = new MemberHandler();
+    if (member.isMember(this.state.memberId)) {
+      this.setState({
+        memberName: member.Name,
+      });
+      console.log("found member: ", this.state.memberName);
+
+      this.setState({
+        pageId: InteractEnum.CALENDAR,
+      });
+    } else {
+      alert('Submitted ID '+this.state.memberId+' does not match our database.');
     }
+
   }
 
   handleTime(event) {
@@ -105,10 +103,10 @@ class App extends Component {
           <h3>Please enter your 4 digit ID number</h3>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Name:
-              <input type="text" value={this.state.memberId} onChange={this.handleChange} />
+              <b>ID: </b>
+              <input type="text" className="input-bar" value={this.state.memberId} onChange={this.handleChange} />
             </label>
-            <input type="submit" value="Enter" />
+            <input type="submit" value="Enter" className="button" />
           </form>
         </div>
       );
@@ -118,7 +116,7 @@ class App extends Component {
 
       return (
         <div>
-          <h3>Hello {this.state.memberId}</h3>
+          <h3>Hello {this.state.memberName}</h3>
           <div className="float-left">
             {this.selectDate()}
           </div>
@@ -127,6 +125,7 @@ class App extends Component {
           </div>
         </div>
       );
+
     }
 
   } // whatToRender
