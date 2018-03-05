@@ -5,7 +5,7 @@ This is a small hobby project aiming to create a tool for logging your work.
 I needed something to log how much employees have worked per day. This has to be logged for weeks and months and eventually the work year.
 
 ## Progress
-**This is still in progress. So if you clone it or use parts of this, be warned!**
+**This project is still in progress. So if you clone it or use parts of it, be warned!**
 
 - I have designed the framework, the necessary classes and handlers
 - todo.md has the tasks list...
