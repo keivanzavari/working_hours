@@ -51,11 +51,56 @@ class App extends Component {
   selectTime() {
     if (this.state.pageId === InteractEnum.WORKHOUR) {
       return (
-        <div>
-          Start: <input className="input-bar" type="time" id="timeStart" defaultValue="09:00" onChange={this.handleTime}/><br/>
-          Break: <input className="input-bar" type="text" id="timeBreak" defaultValue="30" onChange={this.handleTime}/> minutes<br/>
-          Finish: <input className="input-bar" type="time" id="timeFinish" defaultValue="17:00" onChange={this.handleTime}/><br/><br/>
-          <button className="button">Save</button>
+        <div class="parent">
+            <div class="row">
+              <div class="col1">
+                Date
+              </div>
+              <div class="col2">
+                Start:
+              </div>
+              <div class="col3">
+                <input className="input-bar" type="time" id="timeStart" defaultValue="09:00" onChange={this.handleTime}/>
+              </div>
+              <div class="col4">
+              </div>
+              <div class="col5">
+                <button className="button" type="submit" name="save_work_hour">Save</button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col1">
+                <button className="button-purple" type="button" name="member_absent">Absent</button>
+              </div>
+              <div class="col2">
+                Break
+              </div>
+              <div class="col3">
+                <input className="input-bar" type="text" id="timeBreak" defaultValue="30" onChange={this.handleTime}/>
+              </div>
+              <div class="col4">
+                minutes
+              </div>
+              <div class="col5">
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col1">
+            </div>
+            <div class="col2">
+              Finish
+            </div>
+            <div class="col3">
+              <input className="input-bar" type="time" id="timeFinish" defaultValue="17:00" onChange={this.handleTime}/>
+            </div>
+            <div class="col4">
+            </div>
+            <div class="col5">
+            </div>
+          </div>
+
         </div>
       );
     }
