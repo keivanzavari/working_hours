@@ -28,6 +28,49 @@
   to { transform: rotate(360deg); }
 }
 
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.parent {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  /*border: 1px solid black;*/
+  /*border-radius: 10px;*/
+  padding: 10px;
+}
+.row {
+  width: 100%;
+  letter-spacing: -0.31em;
+}
+.col1, .col2, .col3, .col4 , .col5 {
+  display: inline-block;
+  /*vertical-align: top;*/
+  /*border: 1px solid black;*/
+  /*background: #ccc;*/
+  padding: 5px;
+  margin: 2px 0.1%;
+  letter-spacing: normal;
+}
+.col1 {
+  width: 15%;
+}
+.col2 {
+  width: 10%;
+}
+.col3 {
+  width: 25%;
+}
+.col4 {
+  width: 10%;
+}
+.col5 {
+  width: 15%;
+}
+
+
 .input-bar {
   width: 200px;
   margin-left: 3px;
@@ -42,6 +85,27 @@
   border: none;
   border-radius: 10px;
   box-shadow: 0 2px #999;*/
+}
+
+.button-purple {
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 5px 10px;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4d0063;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 0 2px #889;
+}
+
+.button-purple:active {
+  background-color: #500233;
+  box-shadow: 0 2px #666;
+  /*transform: translateY(4px);*/
 }
 
 .button {
@@ -62,8 +126,8 @@
 .button:hover {background-color: #3e8e41}
 
 .button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 2px #666;
+  background-color: #1f5c21;
+  /*box-shadow: 0 2px #666;*/
   /*transform: translateY(4px);*/
 }
 
